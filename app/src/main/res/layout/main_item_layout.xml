@@ -3,11 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="16dp">
     <TextView
+        android:background="@drawable/main_item_layout_background"
+        android:textColor="@color/colorWhite"
         android:id="@+id/mainReciepeName"
         android:layout_width="match_parent"
-        android:layout_height="88dp"
+        android:layout_height="120dp"
         android:text="PIZZA"
         android:gravity="center"
         android:textSize="60sp"

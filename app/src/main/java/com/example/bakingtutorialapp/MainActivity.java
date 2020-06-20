@@ -22,6 +22,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static androidx.recyclerview.widget.LinearLayoutManager.VERTICAL;
+
 public class MainActivity extends AppCompatActivity {
 
     MainActivityAsyncClass mainActivityAsyncClass;

@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorBlack"
     android:orientation="vertical">
 
     <TextView
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:id="@+id/shortStepView"
         android:layout_width="match_parent"
@@ -14,6 +16,7 @@
         android:textSize="30sp" />
 
     <TextView
+        android:textColor="@color/colorWhite"
         android:id="@+id/longStepView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

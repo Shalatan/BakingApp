@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MasterDetailActivity"></activity>
+        <activity android:name=".IngredientsActivity"></activity>
+        <activity android:name=".MasterDetailActivity" />
         <activity android:name=".MasterStepActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
