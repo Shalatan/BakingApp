@@ -10,9 +10,8 @@
         android:textColor="@color/colorWhite"
         android:id="@+id/mainReciepeName"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:text="PIZZA"
+        android:layout_height="@dimen/main_activity_item_height"
         android:gravity="center"
-        android:textSize="60sp"
+        android:textSize="@dimen/main_activity_text_size"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

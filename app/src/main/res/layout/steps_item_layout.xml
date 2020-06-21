@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="MAIN RECIEPE CONTENT"
-        android:textSize="30sp" />
+        android:textSize="@dimen/textSize_28sp" />
 
     <TextView
         android:textColor="@color/colorWhite"
@@ -22,5 +22,5 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="SECONDARY STEP CONTENT"
-        android:textSize="24sp" />
+        android:textSize="@dimen/textSize_24sp" />
 </LinearLayout>

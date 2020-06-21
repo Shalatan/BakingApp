@@ -7,7 +7,7 @@
     android:name="com.example.bakingtutorialapp.MasterFragmentListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="@dimen/padding_16dp"
+    android:layout_marginRight="@dimen/padding_16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".MasterStepActivity" />

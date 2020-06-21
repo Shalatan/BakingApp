@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">BakingTutorialApp</string>
+    <string name="title_masterfragment_list">LIST</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="check_ingredients">Check Ingredients</string>
+    <string name="next_step">Next Step</string>
+    <string name="ingredient_quantity_tv">4-</string>
+    <string name="ingredient_measure_tv">CUP</string>
+    <string name="widget_text_view">BAKING APP</string>
+    <string name="ingredient_name_tv">IngredientName</string>
+    <string name="master_fragment_list_fragment_package">com.example.bakingapp.MasterFragmentListFragment</string>
+    <string name="text_connected">CONNECTED</string>
 </resources>

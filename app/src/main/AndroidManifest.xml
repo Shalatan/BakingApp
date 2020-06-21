@@ -12,9 +12,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IngredientsActivity"></activity>
+        <receiver android:name=".ReciepeIngredientWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/reciepe_ingredient_widget_info" />
+        </receiver>
+
+        <activity android:name=".IngredientsActivity" />
         <activity android:name=".MasterDetailActivity" />
-        <activity android:name=".MasterStepActivity" />
+        <activity
+            android:name=".MasterStepActivity"
+            android:label="@string/title_masterfragment_list"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
