@@ -10,5 +10,4 @@
     <string name="widget_text_view">BAKING APP</string>
     <string name="ingredient_name_tv">IngredientName</string>
     <string name="master_fragment_list_fragment_package">com.example.bakingapp.MasterFragmentListFragment</string>
-    <string name="text_connected">CONNECTED</string>
 </resources>

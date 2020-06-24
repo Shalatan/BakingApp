@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainActivityAsyncClass = new MainActivityAsyncClass();
         String NETWORK_STATUS = getNetworkStatus();
-        if (NETWORK_STATUS == getString(R.string.text_connected))
+        if (NETWORK_STATUS == "CONNECTED")
         {
             mainActivityAsyncClass.execute("https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json");
         }
