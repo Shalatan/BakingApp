@@ -1,9 +1,11 @@
 package com.example.bakingtutorialapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.IdlingResource;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -26,9 +28,23 @@ import static androidx.recyclerview.widget.LinearLayoutManager.VERTICAL;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String DATA_LINK = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
     MainActivityAsyncClass mainActivityAsyncClass;
     RecyclerView recyclerView;
     MainActivityAdapter mainActivityAdapter;
+
+    @NonNull
+    private static EspressoIdleTesting espressoIdleTesting = new EspressoIdleTesting();
+
+    public static IdlingResource getIdlingResource()
+    {
+        if (espressoIdleTesting == null)
+        {
+            espressoIdleTesting = new EspressoIdleTesting();
+        }
+        return espressoIdleTesting;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         String NETWORK_STATUS = getNetworkStatus();
         if (NETWORK_STATUS == "CONNECTED")
         {
-            mainActivityAsyncClass.execute("https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json");
+            mainActivityAsyncClass.execute(DATA_LINK);
         }
         else
         {
@@ -68,8 +84,10 @@ public class MainActivity extends AppCompatActivity {
     public class MainActivityAsyncClass extends AsyncTask<String,Void,String>
     {
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             super.onPreExecute();
+            espressoIdleTesting.setIdleState(false);
         }
         @Override
         protected String doInBackground(String... strings) {
@@ -88,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
             }
             mainActivityAdapter = new MainActivityAdapter(recipeArrayList,MainActivity.this);
             recyclerView.setAdapter(mainActivityAdapter);
+            espressoIdleTesting.setIdleState(true);
             super.onPostExecute(s);
         }
     }
