@@ -66,7 +66,6 @@ public class DetailFragment extends Fragment
             @Override
             public void onClick(View v) {
                 position++;
-
                 if(position==mStepList.size()) {
                     position=0;
                 }
@@ -75,23 +74,17 @@ public class DetailFragment extends Fragment
                 mVideo = mStepList.get(position).getmVideoUrl();
                 startFragment(shortView, longView);
             }
-
-
         });
         return rootView;
     }
     private void startFragment(TextView shortView, TextView longView) {
         shortView.setText(mShort);
         longView.setText(mLong);
-        initializePlayer();
-    }
-    private void initializePlayer() {
         player = ExoPlayerFactory.newSimpleInstance(activity);
         playerView.setPlayer(player);
         Uri uri = Uri.parse(mVideo);
         MediaSource mediaSource = buildMediaSource(uri);
         player.setPlayWhenReady(playWhenReady);
-        player.seekTo(currentWindow, playbackPosition);
         player.prepare(mediaSource, true, true);
     }
     private MediaSource buildMediaSource(Uri uri) {
