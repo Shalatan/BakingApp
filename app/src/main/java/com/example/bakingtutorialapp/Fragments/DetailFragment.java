@@ -47,9 +47,9 @@ public class DetailFragment extends Fragment
         super.onCreate(savedInstanceState);
         mStepList = getArguments().getParcelableArrayList("stepList");
         position = getArguments().getInt("position");
-        mShort =mStepList.get(position).getmShortDescription();
-        mLong =mStepList.get(position).getmLongDescription();
-        mVideo =mStepList.get(position).getmVideoUrl();
+        mShort = mStepList.get(position).getmShortDescription();
+        mLong = mStepList.get(position).getmLongDescription();
+        mVideo = mStepList.get(position).getmVideoUrl();
         activity = this.getActivity();
     }
 
@@ -88,10 +88,8 @@ public class DetailFragment extends Fragment
         player.prepare(mediaSource, true, true);
     }
     private MediaSource buildMediaSource(Uri uri) {
-        DataSource.Factory dataSourceFactory =
-                new DefaultDataSourceFactory(activity, "exoplayer");
-        return new ProgressiveMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(uri);
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(activity, "exoplayer");
+        return new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
     }
     private void releasePlayer() {
         if (player != null) {
