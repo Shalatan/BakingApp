@@ -106,6 +106,7 @@ public class DetailFragment extends Fragment
         return new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
     }
 
+
     @Override
     public void onPause() {
         super.onPause();

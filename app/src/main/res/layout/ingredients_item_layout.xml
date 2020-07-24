@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorBlack"
+    android:padding="8dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/ingredients_ingredient_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/textSize_28sp"
+        tools:text="@string/ingredient_name_tv"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/ingredients_ingredient_quantity"
+            android:textColor="@color/colorWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            tools:text="@string/ingredient_quantity_tv"/>
+        <TextView
+            android:id="@+id/ingredients_ingredient_measure"
+            android:textColor="@color/colorWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            tools:text="@string/ingredient_measure_tv"/>
+    </LinearLayout>
+    <View
+        android:paddingTop="@dimen/padding_6dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/padding_2dp"
+        android:background="@color/colorLightGreen"/>
+</LinearLayout>
