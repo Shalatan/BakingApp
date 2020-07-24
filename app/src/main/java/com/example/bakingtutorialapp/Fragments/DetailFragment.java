@@ -3,16 +3,15 @@ package com.example.bakingtutorialapp.Fragments;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.bakingtutorialapp.POJO.StepsPOJO;
 import com.example.bakingtutorialapp.R;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -33,8 +32,9 @@ public class DetailFragment extends Fragment
     private PlayerView playerView;
     private SimpleExoPlayer player;
     private boolean playWhenReady = true;
-    private int currentWindow = 0;
     private long playbackPosition = 0;
+
+    private int currentWindow = 0;
     Activity activity;
     private ArrayList<StepsPOJO> mStepList;
     private int position;
@@ -57,11 +57,24 @@ public class DetailFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detail_part,container,false);
+        long newPosition = 0;
+        if (savedInstanceState != null)
+        {
+            newPosition = savedInstanceState.getLong("POS");
+            playWhenReady = savedInstanceState.getBoolean("STATE");
+            Log.w("POSITION____________________________RECEIVED", String.valueOf(newPosition));
+        }
+
+        player = ExoPlayerFactory.newSimpleInstance(activity);
         playerView = rootView.findViewById(R.id.video_view);
+        playerView.setPlayer(player);
+
         final TextView shortView = rootView.findViewById(R.id.detailFragmentShortStep);
         final TextView longView = rootView.findViewById(R.id.detailFragmentLongStep);
         Button nextStep = rootView.findViewById(R.id.detailFragmentNextStepButton);
-        startFragment(shortView, longView);
+
+        startFragment(shortView, longView,newPosition,playWhenReady);
+
         nextStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,25 +85,39 @@ public class DetailFragment extends Fragment
                 mShort = mStepList.get(position).getmShortDescription();
                 mLong = mStepList.get(position).getmLongDescription();
                 mVideo = mStepList.get(position).getmVideoUrl();
-                startFragment(shortView, longView);
+                startFragment(shortView, longView,0,true);
             }
         });
         return rootView;
     }
-    private void startFragment(TextView shortView, TextView longView) {
+    private void startFragment(TextView shortView, TextView longView, long position, boolean state) {
         shortView.setText(mShort);
         longView.setText(mLong);
-        player = ExoPlayerFactory.newSimpleInstance(activity);
-        playerView.setPlayer(player);
         Uri uri = Uri.parse(mVideo);
         MediaSource mediaSource = buildMediaSource(uri);
-        player.setPlayWhenReady(playWhenReady);
-        player.prepare(mediaSource, true, true);
+        player.setPlayWhenReady(state);
+        Log.w("POSITION____________________________RECEIVEDinFRAGMENT", String.valueOf(position));
+        player.seekTo(position);
+        player.prepare(mediaSource);
     }
+
     private MediaSource buildMediaSource(Uri uri) {
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(activity, "exoplayer");
         return new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        releasePlayer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        releasePlayer();
+    }
+
     private void releasePlayer() {
         if (player != null) {
             playWhenReady = player.getPlayWhenReady();
@@ -100,14 +127,12 @@ public class DetailFragment extends Fragment
             player = null;
         }
     }
+
     @Override
-    public void onPause() {
-        super.onPause();
-        releasePlayer();
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-        releasePlayer();
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong("POS",playbackPosition);
+        Log.w("POSITION____________________________SENTTTT", String.valueOf(playbackPosition));
+        outState.putBoolean("STATE",playWhenReady);
     }
 }
