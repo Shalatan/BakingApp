@@ -18,14 +18,16 @@ public class MasterDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master_detail);
 
-        Bundle arguments = new Bundle();
-        arguments.putParcelableArrayList("stepList", getIntent().getParcelableArrayListExtra("stepList"));
-        arguments.putInt("position", getIntent().getIntExtra("position",0));
-        DetailFragment fragment = new DetailFragment();
-        fragment.setArguments(arguments);
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.masterfragment_detail_container, fragment)
-                .commit();
-
+            Bundle arguments = new Bundle();
+            arguments.putParcelableArrayList("stepList", getIntent().getParcelableArrayListExtra("stepList"));
+            arguments.putInt("position", getIntent().getIntExtra("position", 0));
+            if (savedInstanceState == null)
+            {
+            DetailFragment fragment = new DetailFragment();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.masterfragment_detail_container, fragment)
+                    .commit();
+        }
     }
 }

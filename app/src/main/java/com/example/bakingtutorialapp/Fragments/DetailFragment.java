@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.example.bakingtutorialapp.POJO.StepsPOJO;
 import com.example.bakingtutorialapp.R;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -24,8 +26,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 
 import java.util.ArrayList;
 
-public class DetailFragment extends Fragment
-{
+public class DetailFragment extends Fragment {
     private String mLong;
     private String mShort;
     private String mVideo;
@@ -39,8 +40,8 @@ public class DetailFragment extends Fragment
     private ArrayList<StepsPOJO> mStepList;
     private int position;
 
-    public DetailFragment()
-    { }
+    public DetailFragment() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,49 +57,48 @@ public class DetailFragment extends Fragment
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_detail_part,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_detail_part, container, false);
         long newPosition = 0;
-        if (savedInstanceState != null)
-        {
+        if (savedInstanceState != null) {
             newPosition = savedInstanceState.getLong("POS");
             playWhenReady = savedInstanceState.getBoolean("STATE");
-            Log.w("POSITION____________________________RECEIVED", String.valueOf(newPosition));
         }
 
-        player = ExoPlayerFactory.newSimpleInstance(activity);
-        playerView = rootView.findViewById(R.id.video_view);
-        playerView.setPlayer(player);
 
         final TextView shortView = rootView.findViewById(R.id.detailFragmentShortStep);
         final TextView longView = rootView.findViewById(R.id.detailFragmentLongStep);
         Button nextStep = rootView.findViewById(R.id.detailFragmentNextStepButton);
+        playerView = rootView.findViewById(R.id.video_view);
 
-        startFragment(shortView, longView,newPosition,playWhenReady);
+
+        startFragment(shortView, longView, newPosition, playWhenReady);
 
         nextStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 position++;
-                if(position==mStepList.size()) {
-                    position=0;
+                if (position == mStepList.size()) {
+                    position = 0;
                 }
                 mShort = mStepList.get(position).getmShortDescription();
                 mLong = mStepList.get(position).getmLongDescription();
                 mVideo = mStepList.get(position).getmVideoUrl();
-                startFragment(shortView, longView,0,true);
+                startFragment(shortView, longView, 0, true);
             }
         });
         return rootView;
     }
+
     private void startFragment(TextView shortView, TextView longView, long position, boolean state) {
         shortView.setText(mShort);
         longView.setText(mLong);
         Uri uri = Uri.parse(mVideo);
         MediaSource mediaSource = buildMediaSource(uri);
+        player = ExoPlayerFactory.newSimpleInstance(activity);
+        playerView.setPlayer(player);
         player.setPlayWhenReady(state);
-        Log.w("POSITION____________________________RECEIVEDinFRAGMENT", String.valueOf(position));
-        player.seekTo(position);
         player.prepare(mediaSource);
+        player.seekTo(position);
     }
 
     private MediaSource buildMediaSource(Uri uri) {
@@ -132,8 +132,7 @@ public class DetailFragment extends Fragment
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putLong("POS",playbackPosition);
-        Log.w("POSITION____________________________SENTTTT", String.valueOf(playbackPosition));
-        outState.putBoolean("STATE",playWhenReady);
+        outState.putLong("POS", playbackPosition);
+        outState.putBoolean("STATE", playWhenReady);
     }
 }
